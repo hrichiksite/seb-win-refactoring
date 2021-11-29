@@ -18,9 +18,7 @@ namespace SafeExamBrowser.SystemComponents
 		/// Virtualbox: VBOX, 80EE
 		/// RedHat: QUEMU, 1AF4, 1B36
 		/// </summary>
-		private static readonly string[] PCI_VENDOR_BLACKLIST = { "vbox", "vid_80ee", "qemu", "ven_1af4", "ven_1b36", "subsys_11001af4" };
-		private static readonly string VIRTUALBOX_MAC_PREFIX = "080027";
-		private static readonly string QEMU_MAC_PREFIX = "525400";
+
 
 		private ILogger logger;
 		private ISystemInfo systemInfo;
@@ -33,31 +31,10 @@ namespace SafeExamBrowser.SystemComponents
 
 		public bool IsVirtualMachine()
 		{
-			var isVirtualMachine = false;
-			var manufacturer = systemInfo.Manufacturer.ToLower();
-			var model = systemInfo.Model.ToLower();
-			var macAddress = systemInfo.MacAddress;
-			var plugAndPlayDeviceIds = systemInfo.PlugAndPlayDeviceIds;
-
-			isVirtualMachine |= manufacturer.Contains("microsoft corporation") && !model.Contains("surface");
-			isVirtualMachine |= manufacturer.Contains("vmware");
-			isVirtualMachine |= manufacturer.Contains("parallels software");
-			isVirtualMachine |= model.Contains("virtualbox");
-			isVirtualMachine |= manufacturer.Contains("qemu");
-
-			if (macAddress != null && macAddress.Count() > 2)
-			{
-				isVirtualMachine |= macAddress.StartsWith(QEMU_MAC_PREFIX) || macAddress.StartsWith(VIRTUALBOX_MAC_PREFIX);
-			}
-
-			foreach (var device in plugAndPlayDeviceIds)
-			{
-				isVirtualMachine |= PCI_VENDOR_BLACKLIST.Any(device.ToLower().Contains);
-			}
-
-			logger.Debug($"Computer '{systemInfo.Name}' appears to {(isVirtualMachine ? "" : "not ")}be a virtual machine.");
-
-			return isVirtualMachine;
+			logger.Debug($"idk if this comp is a vm or not.");
+			
+			/// bruh
+			return false;
 		}
 	}
 }

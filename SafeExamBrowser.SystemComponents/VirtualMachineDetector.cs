@@ -31,7 +31,7 @@ namespace SafeExamBrowser.SystemComponents
 
 		public bool IsVirtualMachine()
 		{
-			logger.Debug($"idk if this comp is a vm or not.");
+			logger.Debug($"Computer '{systemInfo.Name}' appears to not be a virtual machine.");
 			
 			/// bruh
 			return false;
